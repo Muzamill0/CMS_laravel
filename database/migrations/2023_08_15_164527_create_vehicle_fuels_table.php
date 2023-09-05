@@ -18,7 +18,7 @@ class CreateVehicleFuelsTable extends Migration
             $table->unsignedBigInteger('vehicle_id');
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
-            $table->string('odometer_readings');
+            $table->string('meter_readings');
             $table->string('price_per_unit');
             $table->string('total_fuel');
             $table->string('total_price');

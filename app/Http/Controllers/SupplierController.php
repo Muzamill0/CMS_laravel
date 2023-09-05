@@ -42,16 +42,23 @@ class SupplierController extends Controller
         $request->validate([
             'name' => 'required| unique:suppliers,name',
             'email' => 'required| unique:suppliers,email',
-            'phone_no' => 'required| unique:suppliers,contact',
+            'phone_no' => 'required| unique:suppliers,phone_no',
+            'mobile_no' => 'required| unique:suppliers,mobile_no',
             'address' => 'required',
+            'ntn_no' => 'required',
         ]);
 
         $data = [
             'name' => $request->name,
+            'contact_person' => $request->contact_person,
             'email' => $request->email,
+            'mobile_no' => $request->mobile_no,
             'phone_no' => $request->phone_no,
             'address' => $request->address,
-            'status' =>  1,
+            'ntn_no' => $request->ntn_no,
+            'strn_no' => $request->strn_no,
+            'fax_no' => $request->fax_no,
+            'status' => 1,
         ];
 
         $supplier_created = Supplier::create($data);
@@ -98,18 +105,25 @@ class SupplierController extends Controller
     public function update(Request $request, Supplier $supplier)
     {
         $request->validate([
-            'name' => 'required|unique:users,email,' . $supplier->id . ',id',
-            'email' => 'required|unique:users,email,' . $supplier->id . ',id',
-            'phone_no' => 'required|unique:users,email,' . $supplier->id . ',id',
+            'name' => 'required|unique:suppliers,name,' . $supplier->id . ',id',
+            'email' => 'required|unique:suppliers,email,' . $supplier->id . ',id',
+            'phone_no' => 'required|unique:suppliers,phone_no,' . $supplier->id . ',id',
+            'mobile_no' => 'required|unique:suppliers,mobile_no,' . $supplier->id . ',id',
             'address' => 'required',
+            'ntn_no' => 'required',
             'status' => 'required'
         ]);
 
         $data = [
             'name' => $request->name,
+            'contact_person' => $request->contact_person,
             'email' => $request->email,
+            'mobile_no' => $request->mobile_no,
             'phone_no' => $request->phone_no,
             'address' => $request->address,
+            'ntn_no' => $request->ntn_no,
+            'strn_no' => $request->strn_no,
+            'fax_no' => $request->fax_no,
             'status' => $request->status,
         ];
 

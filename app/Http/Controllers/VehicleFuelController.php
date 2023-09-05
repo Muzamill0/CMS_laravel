@@ -46,19 +46,20 @@ class VehicleFuelController extends Controller
             'vehicle_id' => 'required',
             'date' => 'required',
             'meter_readings' => 'required',
+            'price_per_unit' => 'required',
             'total_fuel' => 'required',
-            'total_price' => 'required',
             'location' => 'required',
         ]);
 
         // dd($request->all());
+        $total_price = $request->price_per_unit * $request->total_fuel;
         $data = [
             'vehicle_id' => $request->vehicle_id,
             'date' => $request->date,
             'meter_readings' => $request->meter_readings,
             'price_per_unit' => $request->price_per_unit,
             'total_fuel' => $request->total_fuel,
-            'total_price' => $request->total_price,
+            'total_price' => $total_price,
             'location' => $request->location,
          ];
 

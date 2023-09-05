@@ -19,20 +19,38 @@
             <table class="table">
                 <tr>
                     <th>S no</th>
-                    <th>vehicle Number</th>
+                    <th>Vehicle Type</th>
+                    <th>Vehicle Number</th>
                     <th>Driver Name</th>
+                    <th>Brand Name</th>
+                    <th>Chases No</th>
+                    <th>Engine No</th>
+                    <th>Model No</th>
+                    <th>Reg Date</th>
+                    <th>Reg Authority</th>
+                    <th>Engine Capacity</th>
+                    <th>Vehicle Value</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($vehicles as $vehicle)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $vehicle->number }}</td>
+                    <td>{{ $vehicle->type }}</td>
+                    <td>{{ $vehicle->vehicle_no }}</td>
                     <td>{{ $vehicle->driver_name }}</td>
+                    <td>{{ $vehicle->brand_name }}</td>
+                    <td>{{ $vehicle->chases_no }}</td>
+                    <td>{{ $vehicle->engine_no }}</td>
+                    <td>{{ $vehicle->model_no }}</td>
+                    <td>{{ $vehicle->reg_date }}</td>
+                    <td>{{ $vehicle->reg_authority }}</td>
+                    <td>{{ $vehicle->engine_capacity }}</td>
+                    <td>{{ $vehicle->vehicle_value }}</td>
                     @if($vehicle->status == '1')
-                    <td>Available</td>
+                    <td class="badge bg-success mt-2">Active</td>
                     @else
-                    <td>Not Available</td>
+                    <td class="badge bg-danger mt-2">Inactive</td>
                     @endif
                     <td>
                         <a href="{{ route('vehicle.edit', $vehicle) }}" class="btn btn-primary">Edit</a>

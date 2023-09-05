@@ -10,9 +10,18 @@ class Vehicle extends Model
     use HasFactory;
 
     protected $fillable = [
-        'number',
+        'type',
+        'vehicle_no',
+        'driver_name',
+        'brand_name',
+        'chases_no',
+        'engine_no',
+        'model_no',
+        'reg_date',
+        'reg_authority',
+        'engine_capacity',
+        'vehicle_value',
         'status',
-        'driver_name'
     ];
 
 
@@ -23,5 +32,10 @@ class Vehicle extends Model
 
     public function maintenance(){
         return $this->hasMany(VehicleMaintenance::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(PurchaseOrder::class);
     }
 }

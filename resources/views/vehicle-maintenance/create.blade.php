@@ -26,7 +26,7 @@
                                 <option value="" selected hidden disabled>Select a vehicle</option>
                                 @foreach ($vehicles as $vehicle)
                                     <option value="{{ $vehicle->id }}" value="{{ old('vehicle') == $vehicle->id ? 'selected' : '' }}">
-                                        {{ $vehicle->number }}
+                                        {{ $vehicle->vehicle_no }}
                                     </option>
                                 @endforeach
                             </select>

@@ -10,7 +10,20 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
+        'customer_id',
         'title',
-        'city'
+        'area',
+        'project_code',
+        'status'
     ];
+
+    public function purchases()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

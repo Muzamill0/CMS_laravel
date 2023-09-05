@@ -20,16 +20,31 @@
                 <tr>
                     <th>S no</th>
                     <th>Organization</th>
-                    <th>Location</th>
+                    <th>Owner Name</th>
+                    <th>Email</th>
+                    <th>Mobile No</th>
                     <th>Phone no</th>
+                    <th>Address</th>
+                    <th>Sales Tax No</th>
+                    <th>NTN No</th>
+                    <th>Tag Line</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($organizations as $organization)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $organization->name }}</td>
-                    <td>{{ $organization->location }}</td>
+                    <td>{{ $organization->owner_name }}</td>
+                    <td>{{ $organization->email }}</td>
+                    <td>{{ $organization->mobile_no }}</td>
                     <td>{{ $organization->ph_no }}</td>
+                    <td>{{ $organization->address }}</td>
+                    <td>{{ $organization->sales_tax_no }}</td>
+                    <td>{{ $organization->ntn_no }}</td>
+                    <td>{{ $organization->tag_line }}</td>
+                    <td>
+                        <img src="{{ asset('logos/'. $organization->logo) }}" width="70" alt="Logo">
+                    </td>
                     <td>
                         <a href="{{ route('organization.edit', $organization) }}" class="btn btn-primary">Edit</a>
                     </td>

@@ -39,14 +39,25 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'number' => 'required',
+            'type' => 'required',
+            'vehicle_no' => 'required| unique:vehicles,vehicle_no',
             'driver_name' => 'required',
-            'status' => 'required'
+            'brand_name' => 'required',
+            'model_no' => 'required',
         ]);
         $data = [
-            'number' => $request->number,
+            'type' => $request->type,
+            'vehicle_no' => $request->vehicle_no,
             'driver_name' => $request->driver_name,
-            'status' => $request->status,
+            'brand_name' => $request->brand_name,
+            'chases_no' => $request->chases_no,
+            'engine_no' => $request->engine_no,
+            'model_no' => $request->model_no,
+            'reg_date' => $request->reg_date,
+            'reg_authority' => $request->reg_authority,
+            'engine_capacity' => $request->engine_capacity,
+            'vehicle_value' => $request->vehicle_value,
+            'status' => 1,
         ];
 
         $vehicle_created = Vehicle::create($data);
@@ -95,13 +106,24 @@ class VehicleController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'number' => 'required',
+            'type' => 'required',
+            'vehicle_no' => 'required| unique:vehicles,vehicle_no,' . $vehicle->id . ',id',
             'driver_name' => 'required',
-            'status' => 'required'
+            'brand_name' => 'required',
+            'model_no' => 'required',
         ]);
         $data = [
-            'number' => $request->number,
+            'type' => $request->type,
+            'vehicle_no' => $request->vehicle_no,
             'driver_name' => $request->driver_name,
+            'brand_name' => $request->brand_name,
+            'chases_no' => $request->chases_no,
+            'engine_no' => $request->engine_no,
+            'model_no' => $request->model_no,
+            'reg_date' => $request->reg_date,
+            'reg_authority' => $request->reg_authority,
+            'engine_capacity' => $request->engine_capacity,
+            'vehicle_value' => $request->vehicle_value,
             'status' => $request->status,
         ];
 

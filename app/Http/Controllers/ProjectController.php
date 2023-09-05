@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        $data = [
+            'customers' => Customer::where('status', 1)->get(),
+        ];
+        return view('project.create',$data);
     }
 
     /**
@@ -39,13 +43,18 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'customer' => 'required',
             'title' => 'required',
-            'city' => 'required',
+            'area' => 'required',
+            'project_code' => 'required|unique:projects,project_code',
         ]);
 
         $data = [
+            'customer_id' => $request->customer,
             'title' => $request->title,
-            'city' => $request->city
+            'area' => $request->area,
+            'project_code' => $request->project_code,
+            'status' => '1'
         ];
 
         $project_created = Project::create($data);
@@ -76,6 +85,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $data = [
+            'customers' => Customer::where('status', 1)->get(),
             'project' => $project,
         ];
         return view('project.edit', $data);
@@ -90,23 +100,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, project $project)
     {
-        {
-            $request->validate([
-                'title' => 'required',
-                'city' => 'required',
-            ]);
+        $request->validate([
+            'customer' => 'required',
+            'title' => 'required',
+            'area' => 'required',
+            'project_code' => 'required|unique:projects,project_code,'. $project->id .',id',
+        ]);
 
-            $data = [
-                'title' => $request->title,
-                'city' => $request->city
-            ];
+        $data = [
+            'customer_id' => $request->customer,
+            'title' => $request->title,
+            'area' => $request->area,
+            'project_code' => $request->project_code,
+            'status' => $request->status
+        ];
 
-            $project_updated = Project::find($project->id)->update($data);
-            if($project_updated){
-                return back()->with('success' , 'Project has been updated');
-            } else{
-                return back()->with('error' , 'Project has failed to update');
-            }
+        $project_updated = Project::find($project->id)->update($data);
+        if($project_updated){
+            return back()->with('success' , 'Project has been updated');
+        } else{
+            return back()->with('error' , 'Project has failed to update');
         }
     }
 

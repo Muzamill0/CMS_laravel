@@ -28,12 +28,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Create roles and assign permissions
         $role = Role::create([
-            'name' => 'admin',
+            'name' => 'Admin',
     ]);
         $role->syncPermissions($permissions);
 
         $role = Role::create([
-            'name' => 'employee'
+            'name' => 'Employee'
         ]);
         $role->syncPermissions([
             'create user',

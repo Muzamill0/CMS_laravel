@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Users')
+@section('title', 'Purchase')
 
 @section('content')
 
@@ -8,52 +8,67 @@
         <div class="card-header">
             <div class="row col-12">
                 <div class="col-6">
-                    <h4>Edit User</h4>
+                    <h4>Purchase Order Edit</h4>
                 </div>
                 <div class="col-6 text-end">
-                    <a href="{{ route('users') }}" class="btn btn-outline-primary">Back</a>
+                    <a href="{{ route('purchases') }}" class="btn btn-outline-primary">Back</a>
                 </div>
             </div>
             <div class="card-body">
                 @include('partials.alert')
-                <form class="container" action="{{ route('user.edit', $user) }}" method="POST">
+                <form class="container" action="{{ route('purchase.edit', $purchase) }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="mb-4 col-md-4">
-                            <label class="col-form-label">Role</label>
+                            <label class="col-form-label">Select Supplier</label>
                             <div class="col-sm-12">
-                                <select name="role" id="role" class="form-select @error('role') is-invalid @enderror">
-                                    <option value="" selected hidden disabled>Select a role</option>
-                                    @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}"
-                                            @foreach ($user->roles as $user_role)
-                                            @if (old('role')) {{ old('role') == $role->id ? 'selected' : '' }} @else {{ $user_role->id == $role->id ? 'selected' : '' }} @endif>
-                                            @endforeach
-                                            {{ $role->name }}
+                                <select name="supplier" id="supplier"
+                                    class="form-select @error('supplier') is-invalid @enderror">
+                                    <option value="" selected hidden disabled>Select a supplier</option>
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}"
+                                            @if (old('supplier')) {{ old('supplier') == $supplier->id ? 'selected' : '' }} @else {{ $supplier->id == $purchase->supplier_id ? 'selected' : '' }} @endif>
+                                            {{ $supplier->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('role')
-                                    <p class="text-muted">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class=" mb-4 col-md-4">
-                            <label for="name-input" class="col-form-label">Full Name</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"" name="name"
-                                    id="name-input" value="{{ old('name') ? old('name') : $user->name}}" placeholder="Enter Full Name">
-                                @error('name')
+                                @error('supplier')
                                     <p class="text-muted">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
                         <div class="mb-4 col-md-4">
-                            <label for="email-input" class="col-form-label">Email</label>
+                            <label class="col-form-label">Select Project</label>
                             <div class="col-sm-12">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"" name="email"
-                                    id="email-input" value="{{ old('email') ? old('email') : $user->email }}" placeholder="Enter E-mail">
-                                @error('email')
+                                <select name="project" id="project"
+                                    class="form-select @error('project') is-invalid @enderror">
+                                    <option value="" selected hidden disabled>Select a project</option>
+                                    @foreach ($projects as $project)
+                                        <option value="{{ $project->id }}"
+                                            @if (old('project')) {{ old('project') == $project->id ? 'selected' : '' }} @else {{ $project->id == $purchase->project_id ? 'selected' : '' }} @endif>
+                                            {{ $project->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('project')
+                                    <p class="text-muted">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mb-4 col-md-4">
+                            <label class="col-form-label">Select Vehicle</label>
+                            <div class="col-sm-12">
+                                <select name="vehicle" id="vehicle"
+                                    class="form-select @error('vehicle') is-invalid @enderror">
+                                    <option value="" selected hidden disabled>Select a vehicle</option>
+                                    @foreach ($vehicles as $vehicle)
+                                        <option value="{{ $vehicle->id }}"
+                                            @if (old('vehicle')) {{ old('vehicle') == $vehicle->id ? 'selected' : '' }} @else {{ $vehicle->id == $purchase->vehicle_id ? 'selected' : '' }} @endif>
+                                            {{ $vehicle->number }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('vehicle')
                                     <p class="text-muted">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -61,86 +76,53 @@
 
                     </div>
                     <div class="row">
-                        <div class="mb-4 col-md-4">
-                            <label for="password-input" class="col-form-label">Password</label>
+                        <div class=" mb-4 col-md-4">
+                            <label for="name-input" class="col-form-label">Product Name</label>
                             <div class="col-sm-12">
-                                <input type="password" name="password"
-                                    class="form-control @error('password') is-invalid @enderror"" id="password-input"
-                                    placeholder="Enter Password">
-                                @error('password')
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                    id="name-input" value="{{ old('name') ? old('name') : $purchase->product_name }}" placeholder="Enter Full Name">
+                                @error('name')
                                     <p class="text-muted">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
                         <div class="mb-4 col-md-4">
-                            <label for="contact-input" class="col-form-label">Contact</label>
+                            <label for="quantity-input" class="col-form-label">Quantity</label>
                             <div class="col-sm-12">
-                                <input type="number" name="contact"
-                                    class="form-control @error('contact') is-invalid @enderror"" value="{{ old('contact') ? old('contact') : $user->contact_no }}" id="contact-input"
-                                    placeholder="Enter contact">
-                                @error('contact')
+                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity"
+                                    id="quantity-input" value="{{ old('quantity') ? old('quantity') : $purchase->quantity }}" placeholder="Enter quantity">
+                                @error('quantity')
                                     <p class="text-muted">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
                         <div class="mb-4 col-md-4">
-                            <label for="cnic-input" class="col-form-label">Cnic</label>
+                            <label for="price_per_unit-input" class="col-form-label">Price Per Unit</label>
                             <div class="col-sm-12">
-                                <input type="number" name="cnic" class="form-control @error('cnic') is-invalid @enderror"
-                                    id="cnic-input" value="{{ old('cnic') ? old('cnic') : $user->cnic }}" placeholder="Enter cnic">
-                                @error('cnic')
+                                <input type="number" name="price_per_unit" value="{{ old('price_per_unit') ? old('price_per_unit') : $purchase->price_per_unit }}"
+                                    class="form-control @error('price_per_unit') is-invalid @enderror"
+                                    id="price_per_unit-input" onchange="getTotalPrice()" placeholder="Enter price per unit">
+                                @error('price_per_unit')
                                     <p class="text-muted">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class= "mb-4 col-md-4">
-                            <label for="dob-input" class="col-form-label">Date of Birth</label>
+                        <div class="mb-4 col-md-6">
+                            <label for="total_cost-input"class="col-form-label">Total Cost</label>
                             <div class="col-sm-12">
-                                <input type="date" name="dob" value="{{ old('dob') ? old('dob') : $user->dob }}" class="form-control @error('dob') is-invalid @enderror"
-                                    id="dob-input" placeholder="Enter dob">
-                                @error('dob')
-                                    <p class="text-muted">{{ $message }}</p>
-                                @enderror
+                                <input type="number" name="total_cost" class="form-control @error('total_cost') is-invalid @enderror"
+                                    id="total_cost-input" placeholder="Total Cost" disabled>
                             </div>
                         </div>
-                        <div class= "mb-4 col-md-4">
-                            <label for="gender-input" class="col-form-label">Gender</label>
-                            <div class="col-sm-12 row">
-                                <div class="col-md-4 border-1">
-                                    <label class="form-check-label" for="exampleRadios1">Male </label>
-                                    <input type="radio" name="gender" checked
-                                        class="form-check-inpu @error('gender') is-invalid @enderror" value="Male"
-                                        placeholder="Enter gender">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-check-label" for="exampleRadios1">Female</label>
-                                    <input type="radio" name="gender" {{ old('gender') == $user->gender ? 'checked' : '' }}
-                                        class="form-check-inpu @error('gender') is-invalid @enderror" value="Female"
-                                        placeholder="Enter gender">
-                                </div>
-                                @error('gender')
-                                    <p class="text-muted">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class= "mb-4 col-md-4">
-                            <label for="status-input" class="col-form-label">Status</label>
-                            <div class="col-sm-12 row">
-                                <div class="col-md-4">
-                                    <label class="form-check-label" for="exampleRadios1">Active</label>
-                                    <input type="radio" name="status" checked
-                                        class="form-check-inpu @error('status') is-invalid @enderror" value="1"
-                                        placeholder="Enter status">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-check-label" for="exampleRadios1">Inactive</label>
-                                    <input type="radio" name="status" {{ old('status') == $user->status ? 'checked' : '' }}
-                                        class="form-check-inpu @error('status') is-invalid @enderror" value="0"
-                                        placeholder="Enter status">
-                                </div>
-                                @error('status')
+                        <div class="mb-4 col-md-6">
+                            <label for="date-input" class="col-form-label">Date</label>
+                            <div class="col-sm-12">
+                                <input type="date" name="date" value="{{ old('date') ? old('date') : $purchase->date }}"
+                                    class="form-control @error('date') is-invalid @enderror" id="date-input"
+                                    placeholder="Enter date">
+                                @error('date')
                                     <p class="text-muted">{{ $message }}</p>
                                 @enderror
                             </div>

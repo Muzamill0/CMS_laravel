@@ -20,9 +20,14 @@
                 <tr>
                     <th>S no</th>
                     <th>Name</th>
+                    <th>Contact Person</th>
                     <th>Email</th>
+                    <th>Mobile No</th>
                     <th>Phone No</th>
                     <th>Address</th>
+                    <th>NTN No</th>
+                    <th>STRN No</th>
+                    <th>Fax No</th>
                     <th>Stauts</th>
                     <th>Action</th>
                 </tr>
@@ -30,13 +35,18 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $supplier->name }}</td>
+                    <td>{{ $supplier->contact_person }}</td>
                     <td>{{ $supplier->email }}</td>
+                    <td>{{ $supplier->mobile_no }}</td>
                     <td>{{ $supplier->phone_no }}</td>
                     <td>{{ $supplier->address }}</td>
+                    <td>{{ $supplier->ntn_no }}</td>
+                    <td>{{ $supplier->strn_no }}</td>
+                    <td>{{ $supplier->fax_no }}</td>
                     @if ($supplier->status == 1)
-                    <td class="bg-success rounded">Active</td>
+                    <td class="badge badge-soft-success  mt-2">Active</td>
                     @else
-                    <td class="bg-danger">Inactive</td>
+                    <td class="badge badge-soft-danger mt-2">Inactive</td>
                     @endif
                     <td>
                         <a href="{{ route('supplier.edit', $supplier) }}" class="btn btn-primary">Edit</a>

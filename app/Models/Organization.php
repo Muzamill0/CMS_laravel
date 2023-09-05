@@ -11,7 +11,14 @@ class Organization extends Model
 
     protected $fillable = [
         'name',
-        'location',
-        'ph_no'
+        'owner_name',
+        'email',
+        'address',
+        'mobile_no',
+        'ph_no',
+        'sales_tax_no',
+        'ntn_no',
+        'tag_line',
+        'logo'
     ];
 }

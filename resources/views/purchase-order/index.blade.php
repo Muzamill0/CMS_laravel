@@ -19,39 +19,36 @@
             <table class="table">
                 <tr>
                     <th>S no</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Contact No</th>
-                    <th>CNIC</th>
-                    <th>Gender</th>
-                    <th>Date of birth</th>
-                    <th>Status</th>
+                    <th>Supplier</th>
+                    <th>Vehicle</th>
+                    <th>Project</th>
+                    <th>Quantity</th>
+                    <th>Price Per Unit</th>
+                    <th>Total Cost</th>
+                    <th>Date</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($purchases as $purchase)
-                {{-- @dd($purchase->roles) --}}
+                {{-- @dd($purchase) --}}
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $purchase->name }}</td>
-                    <td>{{ $purchase->email }}</td>
-                    <td>{{ $purchase->contact_no }}</td>
-                    <td>{{ $purchase->cnic }}</td>
-                    <td>{{ $purchase->gender }}</td>
-                    <td>{{ $purchase->dob }}</td>
-                    @if ($purchase->status == 1)
-                    <td class="bg-success rounded">Active</td>
-                    @else
-                    <td class="bg-danger">Inactive</td>
-                    @endif
+                    <td>{{ $purchase->supplier->name }}</td>
+                    <td>{{ $purchase->vehicle->number }}</td>
+                    <td>{{ $purchase->project->title }}</td>
+                    <td>{{ $purchase->quantity }}</td>
+                    <td>{{ $purchase->price_per_unit }} Rs</td>
+                    <td>{{ $purchase->total_cost }} Rs</td>
+                    <td>{{ $purchase->date }}</td>
                     <td>
                         <a href="{{ route('purchase.edit', $purchase) }}" class="btn btn-primary">Edit</a>
+                        <a href="" class="btn btn-outline-success">Create Builty</a>
                     </td>
                 </tr>
                 @endforeach
             </table>
-            <div class="row col-10 text-end">
+            {{-- <div class="row col-10 text-end">
                 {{ $purchases->links() }}
-            </div>
+            </div> --}}
             @else
             <p class="text-muted">No Data Found</p>
             @endif

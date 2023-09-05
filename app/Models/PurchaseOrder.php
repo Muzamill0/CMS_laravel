@@ -11,7 +11,7 @@ class PurchaseOrder extends Model
 
     protected $fillable = [
         'supplier_id',
-        'product_id',
+        'project_id',
         'vehicle_id',
         'product_name',
         'quantity',
@@ -19,4 +19,19 @@ class PurchaseOrder extends Model
         'total_cost',
         'date',
     ];
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo(vehicle::class);
+    }
 }

@@ -4,18 +4,22 @@ use App\Models\Supplier;
 use GuzzleHttp\Middleware;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CoaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\VehicleFuelController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RoleAndPermissionController;
 use App\Http\Controllers\VehicleMaintenanceController;
-use App\Models\PurchaseOrder;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +128,55 @@ Route::middleware(Authenticate::class)->group(function(){
         Route::post('/purchase/create', 'store');
         Route::get('/purchase/{purchase}/edit', 'edit')->name('purchase.edit');
         Route::post('/purchase/{purchase}/edit', 'update');
+    });
+
+    Route::controller(DesignationController::class)->group(function(){
+        Route::get('/designations', 'index')->name('designations');
+        Route::get('/designation/create', 'create')->name('designation.create');
+        Route::post('/designation/create', 'store');
+        Route::get('/designation/{designation}/edit', 'edit')->name('designation.edit');
+        Route::post('/designation/{designation}/edit', 'update');
+    });
+
+    Route::controller(EmployeeController::class)->group(function(){
+        Route::get('/employees', 'index')->name('employees');
+        Route::get('/employee/create', 'create')->name('employee.create');
+        Route::post('/employee/create', 'store');
+        Route::get('/employee/{employee}/show', 'show')->name('employee.show');
+        Route::get('/employee/{employee}/edit', 'edit')->name('employee.edit');
+        Route::post('/employee/{employee}/edit', 'update');
+    });
+
+    Route::controller(AttendanceController::class)->group(function(){
+        Route::get('/attendances', 'index')->name('attendances');
+        Route::post('/attendances/fetch', 'fetch_attendance')->name('attendance.fetch');
+        Route::get('/attendance/create', 'create')->name('attendance.create');
+        Route::post('/attendance/create', 'store');
+        Route::get('/attendance/{attendance}/edit', 'edit')->name('attendance.edit');
+        Route::post('/attendance/{attendance}/edit', 'update');
+    });
+
+    Route::controller(CustomerController::class)->group(function(){
+        Route::get('/customers', 'index')->name('customers');
+        Route::get('/customer/create', 'create')->name('customer.create');
+        Route::post('/customer/create', 'store');
+        Route::get('/customer/{customer}/edit', 'edit')->name('customer.edit');
+        Route::post('/customer/{customer}/edit', 'update');
+    });
+
+    Route::controller(CoaController::class)->group(function(){
+        Route::get('/chart-of-accounts', 'index')->name('coa.index');
+        // Route::get('/get/account/lvl1', 'get_acc_lvl1')->name('get.acc.lvl1');
+        // Route::post('/acc/create', 'store');
+        // Route::get('/coa/{coa}/edit', 'edit')->name('coa.edit');
+        // Route::post('/coa/{coa}/edit', 'update');
+        Route::get('/get/account/level/1', 'get_account_level_1')->name('account.get_level_1');
+        Route::get('/get/account/level/2', 'get_account_level_2')->name('account.get_level_2');
+        Route::get('/get/account/level/3', 'get_account_level_3')->name('account.get_level_3');
+        Route::post('/get/new/code', 'get_new_code')->name('account.new_code');
+
+        Route::post('/chart-of-account/create', 'create_account')->name('account.create');
+
     });
 });
 

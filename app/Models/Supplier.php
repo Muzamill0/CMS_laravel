@@ -11,9 +11,19 @@ class Supplier extends Model
 
     protected $fillable = [
         'name',
-        'phone_no',
+        'contact_person',
         'email',
+        'mobile_no',
+        'phone_no',
         'address',
+        'ntn_no',
+        'strn_no',
+        'fax_no',
         'status'
     ];
+
+    public function purchases()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
 }

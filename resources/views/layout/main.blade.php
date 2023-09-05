@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 
-    @include('layout.head')
+@include('layout.head')
 
-    <body data-layout="horizontal" data-topbar="dark">
+<body data-layout="horizontal" data-topbar="dark">
 
     <!-- <body data-layout="horizontal"> -->
 
@@ -11,22 +11,17 @@
     <div id="layout-wrapper">
 
         <header id="page-topbar">
-           @include('layout.top-navbar')
+            @include('layout.top-navbar')
 
 
         </header>
 
-        <div class="hori-overlay"></div>
+        {{-- <div class="hori-overlay"></div> --}}
 
-        <div class="main-content">
-            <div class="page-content">
-                <div class="container-fluid">
+        <div class="m-2">
 
-                    @yield('content')
-                </div>
-            </div>
+            @yield('content')
         </div>
-
     </div>
 
     <!-- Right Sidebar -->
@@ -49,6 +44,6 @@
 
     @include('layout.script')
 
-    </body>
+</body>
 
 </html>

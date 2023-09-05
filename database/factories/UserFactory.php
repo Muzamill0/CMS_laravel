@@ -16,17 +16,17 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            // 'name' => $this->faker->name(),
-            // 'email' => $this->faker->unique()->safeEmail(),
-            // 'email_verified_at' => now(),
-            // 'password' => Hash::make('12345'),
-            // 'contact_no' => $this->faker->randomNumber(10),
-            // 'cnic' => $this->faker->randomNumber(10),
-            // 'dob' => $this->faker->date(),
-            // 'gander' => $this->faker->gander(),
-            // 'status' => '1',
-            // 'remember_token' => Str::random(10),
-        ];
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'contact_no' => '12345678987',
+            'cnic' => '0311223232323',
+            'dob' => $this->faker->date(),
+            'gander' => $this->faker->gander(),
+            'status' => '1',
+            'remember_token' => Str::random(10),
+        ]->attachRole('Admin');
     }
 
     /**

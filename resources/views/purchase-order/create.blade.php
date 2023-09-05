@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Users')
+@section('title', 'Purchase')
 
 @section('content')
 
@@ -8,15 +8,15 @@
         <div class="card-header">
             <div class="row col-12">
                 <div class="col-6">
-                    <h4>Users</h4>
+                    <h4>Purchase Orders Create</h4>
                 </div>
                 <div class="col-6 text-end">
-                    <a href="{{ route('users') }}" class="btn btn-outline-primary">Back</a>
+                    <a href="{{ route('purchases') }}" class="btn btn-outline-primary">Back</a>
                 </div>
             </div>
             <div class="card-body">
                 @include('partials.alert')
-                <form class="container" action="{{ route('user.create') }}" method="POST">
+                <form class="container" action="{{ route('purchase.create') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="mb-4 col-md-4">
@@ -76,89 +76,60 @@
 
                     </div>
                     <div class="row">
-                        
-                    </div>
-                    <div class=" row mb-4">
-                        <label for="name-input" class="col-sm-3 col-form-label">Full Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror"" name="name"
-                                id="name-input" value="{{ old('name') }}" placeholder="Enter Full Name">
-                            @error('name')
-                                <p class="text-muted">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="email-input" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control @error('email') is-invalid @enderror"" name="email"
-                                id="email-input" value="{{ old('email') }}" placeholder="Enter E-mail">
-                            @error('email')
-                                <p class="text-muted">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="password-input" class="col-sm-3 col-form-label">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror"" value="{{ old('password') }}"
-                                id="password-input" placeholder="Enter Password">
-                            @error('password')
-                                <p class="text-muted">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="contact-input" class="col-sm-3 col-form-label">Contact</label>
-                        <div class="col-sm-9">
-                            <input type="number" name="contact"
-                                class="form-control @error('contact') is-invalid @enderror"" value="{{ old('contact') }}"
-                                id="contact-input" placeholder="Enter contact">
-                            @error('contact')
-                                <p class="text-muted">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="cnic-input" class="col-sm-3 col-form-label">Cnic</label>
-                        <div class="col-sm-9">
-                            <input type="number" name="cnic" class="form-control @error('cnic') is-invalid @enderror"
-                                id="cnic-input" value="{{ old('cnic') }}" placeholder="Enter cnic">
-                            @error('cnic')
-                                <p class="text-muted">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="dob-input" class="col-sm-3 col-form-label">Date of Birth</label>
-                        <div class="col-sm-9">
-                            <input type="date" name="dob" value="{{ old('dob') }}"
-                                class="form-control @error('dob') is-invalid @enderror" id="dob-input"
-                                placeholder="Enter dob">
-                            @error('dob')
-                                <p class="text-muted">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="gender-input" class="col-sm-3 col-form-label">Gender</label>
-                        <div class="col-sm-9 row">
-                            <div class="col-md-3">
-                                <label class="form-check-label" for="exampleRadios1">Male </label>
-                                <input type="radio" name="gender" checked
-                                    class="form-check-inpu @error('gender') is-invalid @enderror" value="Male"
-                                    placeholder="Enter gender">
+                        <div class=" mb-4 col-md-4">
+                            <label for="name-input" class="col-form-label">Product Name</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                    id="name-input" value="{{ old('name') }}" placeholder="Enter Full Name">
+                                @error('name')
+                                    <p class="text-muted">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div class="col-md-3">
-                                <label class="form-check-label" for="exampleRadios1">Female</label>
-                                <input type="radio" name="gender"
-                                    class="form-check-inpu @error('gender') is-invalid @enderror" value="Female"
-                                    placeholder="Enter gender">
+                        </div>
+                        <div class="mb-4 col-md-4">
+                            <label for="quantity-input" class="col-form-label">Quantity</label>
+                            <div class="col-sm-12">
+                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity"
+                                    id="quantity-input" value="{{ old('quantity') }}" placeholder="Enter quantity">
+                                @error('quantity')
+                                    <p class="text-muted">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('gender')
-                                <p class="text-muted">{{ $message }}</p>
-                            @enderror
+                        </div>
+                        <div class="mb-4 col-md-4">
+                            <label for="price_per_unit-input" class="col-form-label">Price Per Unit</label>
+                            <div class="col-sm-12">
+                                <input type="number" name="price_per_unit" value="{{ old('price_per_unit') }}"
+                                    class="form-control @error('price_per_unit') is-invalid @enderror"
+                                    id="price_per_unit-input" onchange="getTotalPrice()" placeholder="Enter price per unit">
+                                @error('price_per_unit')
+                                    <p class="text-muted">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-4 col-md-6">
+                            <label for="total_cost-input"class="col-form-label">Total Cost</label>
+                            <div class="col-sm-12">
+                                <input type="number" name="total_cost"
+                                    class="form-control @error('total_cost') is-invalid @enderror" value="{{ old('total_cost') }}"
+                                    id="total_cost-input" placeholder="Total Cost" disabled>
+                                @error('total_cost')
+                                    <p class="text-muted">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mb-4 col-md-6">
+                            <label for="date-input" class="col-form-label">Date</label>
+                            <div class="col-sm-12">
+                                <input type="date" name="date" value="{{ old('date') }}"
+                                    class="form-control @error('date') is-invalid @enderror" id="date-input"
+                                    placeholder="Enter date">
+                                @error('date')
+                                    <p class="text-muted">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <hr>

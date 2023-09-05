@@ -51,6 +51,24 @@
                                                     data-key="t-alerts">Permissions</a>
                                             </div>
                                         </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <a href="{{ route('employees') }}" class="dropdown-item"
+                                                    data-key="t-alerts">Employees</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <a href="{{ route('attendances') }}" class="dropdown-item"
+                                                    data-key="t-alerts">Attendance</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div>
+                                                <a href="{{ route('designations') }}" class="dropdown-item"
+                                                    data-key="t-alerts">Designations</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -82,6 +100,9 @@
                             <div class="dropdown-menu" aria-labelledby="topnav-components">
                                     <a class="dropdown-item dropdown-toggle arrow-none" href="{{ route('suppliers') }}">
                                         <span data-key="t-forms">Suppliers</span>
+                                    </a>
+                                    <a class="dropdown-item dropdown-toggle arrow-none" href="{{ route('customers') }}">
+                                        <span data-key="t-forms">Customers</span>
                                     </a>
                                     <a class="dropdown-item" href="{{ route('purchases') }}">
                                         <span data-key="t-forms">Purchase Order</span>
@@ -177,22 +198,14 @@
                             <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more"
                                 role="button">
                                 <i class="bx bx-file icon"></i>
-                                <span data-key="t-pages">Pages</span>
+                                <span data-key="t-pages">Accounts</span>
                                 <div class="arrow-down"></div>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="topnav-more">
                                 <div class="dropdown">
-                                    <a class="dropdown-item dropdown-toggle arrow-none" href="#"
-                                        id="topnav-pricing" role="button">
-                                        <span data-key="t-pricing">Pricing</span>
-                                        <div class="arrow-down"></div>
+                                    <a class="dropdown-item" href="{{ route('coa.index') }}">
+                                        <span data-key="t-pricing">Chart Of Accounts</span>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="topnav-pricing">
-                                        <a href="pricing-basic.html" class="dropdown-item"
-                                            data-key="t-basic">Basic</a>
-                                        <a href="pricing-table.html" class="dropdown-item"
-                                            data-key="t-table">table</a>
-                                    </div>
                                 </div>
 
                                 <div class="dropdown">
